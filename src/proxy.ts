@@ -11,7 +11,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // API 路由回 401 JSON，頁面路由就 redirect 去登入頁
+  // API 路由回傳 401 JSON，頁面路由則 redirect 至登入頁
   if (pathname.startsWith("/api")) {
     return NextResponse.json({ error: "未登入" }, { status: 401 });
   }

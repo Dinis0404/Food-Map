@@ -1,6 +1,6 @@
 /**
- * 直接初始化 .pglite 資料夾（灌 DDL + 示範資料），唔啟動 server。
- * 一般情況用 npm run db:server 就夠（會自動建表+灌資料）。
+ * 直接初始化 .pglite 資料夾（灌入 DDL + 示範資料），不啟動 server。
+ * 一般情況使用 npm run db:server 即可（會自動建表與灌入資料）。
  *
  * 執行：npm run db:init
  */
@@ -17,7 +17,7 @@ async function main() {
     "SELECT count(*)::text AS n FROM restaurants",
   );
   if (Number(existing.rows[0]?.n ?? "0") > 0) {
-    console.log(`✓ 資料庫已有 ${existing.rows[0]?.n} 間餐廳，跳過示範資料`);
+    console.log(`✓ 資料庫已有 ${existing.rows[0]?.n} 家餐廳，跳過示範資料`);
     await db.close();
     return;
   }
@@ -44,7 +44,7 @@ async function main() {
       }
     }
   }
-  console.log(`✓ 完成：${SEED.length} 間餐廳示範資料已灌入`);
+  console.log(`✓ 完成：${SEED.length} 家餐廳示範資料已灌入`);
   await db.close();
 }
 

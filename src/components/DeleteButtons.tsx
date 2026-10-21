@@ -14,7 +14,7 @@ export function DeleteVisitButton({
   const [deleting, setDeleting] = useState(false);
 
   async function handleDelete() {
-    if (!confirm("刪除呢篇食記？刪咗就搵唔返㗎喇。")) return;
+    if (!confirm("確定刪除這篇食記？刪除後將無法復原。")) return;
     setDeleting(true);
     try {
       const res = await fetch(`/api/visits/${visitId}`, { method: "DELETE" });
@@ -48,7 +48,7 @@ export function DeleteRestaurantButton({ restaurantId }: { restaurantId: string 
   async function handleDelete() {
     if (
       !confirm(
-        "刪除餐廳會連埋佢所有食記一齊剷走，確定？此操作無得復原。",
+        "刪除餐廳會連同其所有食記一併刪除，確定嗎？此操作無法復原。",
       )
     )
       return;

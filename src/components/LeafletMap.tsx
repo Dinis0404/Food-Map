@@ -52,7 +52,7 @@ function FitBounds({ points }: { points: MapPoint[] }) {
   return null;
 }
 
-/** 座標變化時 re-center（揀咗地點之後用） */
+/** 座標變化時重新置中（選定地點後使用） */
 function Recenter({ lat, lng, zoom }: { lat: number; lng: number; zoom?: number }) {
   const map = useMap();
   useEffect(() => {
@@ -77,7 +77,7 @@ type MapViewProps = {
   className?: string;
 };
 
-/** 純展示地圖：一次過顯示多個 pin */
+/** 純展示地圖：一次顯示多個 pin */
 export default function MapView({
   points,
   selectedId,

@@ -23,7 +23,7 @@ export default function FoodMap() {
         return r.json();
       })
       .then((data) => data && setRestaurants(data.restaurants))
-      .catch(() => setError("載入唔到餐廳資料，請重新整理"));
+      .catch(() => setError("無法載入餐廳資料，請重新整理"));
   }, []);
 
   const points = useMemo(
@@ -60,7 +60,7 @@ export default function FoodMap() {
           <h1 className="font-semibold">
             覓食足跡{" "}
             <span className="text-sm font-normal text-stone-500">
-              {restaurants ? `${restaurants.length} 間` : "…"}
+              {restaurants ? `${restaurants.length} 家` : "…"}
             </span>
           </h1>
           <Link
@@ -105,13 +105,13 @@ export default function FoodMap() {
                 href={`/restaurants/${selected.id}`}
                 className="rounded-lg bg-amber-500 px-3 py-1.5 text-sm font-medium text-white hover:bg-amber-600"
               >
-                睇餐廳檔案
+                查看餐廳檔案
               </Link>
               <Link
                 href={`/visits/new?restaurant=${selected.id}`}
                 className="rounded-lg border border-stone-300 bg-white px-3 py-1.5 text-sm hover:bg-stone-50"
               >
-                記返一次
+                再記一筆
               </Link>
             </div>
           </div>
@@ -123,7 +123,7 @@ export default function FoodMap() {
           ) : restaurants.length === 0 ? (
             <div className="px-4 py-10 text-center text-stone-500">
               <div className="mb-2 text-3xl">🍽️</div>
-              仲未有記錄，快啲記低第一餐！
+              還沒有記錄，快來記下第一餐吧！
               <div className="mt-3">
                 <Link
                   href="/visits/new"

@@ -10,7 +10,7 @@ function createDb(): DB {
   const url = process.env.DATABASE_URL;
   if (!url) {
     throw new Error(
-      "未設定 DATABASE_URL。本地開發：先跑 `npm run db:server`，並喺 .env.local 設 DATABASE_URL=postgres://localhost:5433/postgres",
+      "未設定 DATABASE_URL。本地開發：請先執行 `npm run db:server`，並在 .env.local 設定 DATABASE_URL=postgres://localhost:5433/postgres",
     );
   }
   // Neon（Vercel 生產環境）：走 HTTP serverless driver

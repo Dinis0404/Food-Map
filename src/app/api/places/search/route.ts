@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { DEFAULT_CENTER } from "@/lib/constants";
 import type { PlaceCandidate } from "@/lib/types";
 
-/** Photon（komoot）地點搜尋，無結果或失敗就 fallback 去 Nominatim */
+/** Photon（komoot）地點搜尋，無結果或失敗則 fallback 至 Nominatim */
 export async function GET(req: NextRequest) {
   const sp = req.nextUrl.searchParams;
   const q = sp.get("q")?.trim();
@@ -59,7 +59,7 @@ export async function GET(req: NextRequest) {
       }
     }
   } catch {
-    // 落去試 Nominatim
+    // 改試 Nominatim
   }
 
   // 2) Nominatim fallback
@@ -95,7 +95,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ source: "nominatim", results });
     }
   } catch {
-    // 兩個 geocoder 都唔通：當作無結果
+    // 兩個 geocoder 都無法連通：視為無結果
   }
 
   return NextResponse.json({ source: "none", results: [] });

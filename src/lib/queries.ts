@@ -231,7 +231,7 @@ export async function getRestaurantDetail(id: string): Promise<RestaurantDetail 
   };
 }
 
-/** 依 id / osmId 尋找或建立餐廳；失敗（缺欄位）回 null */
+/** 依 id / osmId 尋找或建立餐廳；失敗（缺欄位）回傳 null */
 export async function upsertRestaurant(
   input: VisitInput["restaurant"],
 ): Promise<RestaurantRow | null> {
@@ -270,7 +270,7 @@ export async function upsertRestaurant(
       .returning();
     return created;
   } catch (e) {
-    // 併發下撞唯一索引：當作已存在，重新查一次
+    // 併發下觸發唯一索引衝突：視為已存在，重新查詢一次
     if (input.osmId && String(e).includes("restaurants_osm_id_key")) {
       const [existing] = await db
         .select()
@@ -317,7 +317,7 @@ export async function updateVisit(id: string, input: VisitInput) {
   const [existing] = await db.select().from(visits).where(eq(visits.id, id)).limit(1);
   if (!existing) return null;
 
-  // 餐廳有換嘅話先處理
+  // 若有更換餐廳才處理
   let restaurantId = existing.restaurantId;
   if (input.restaurant.id && input.restaurant.id !== existing.restaurantId) {
     const restaurant = await upsertRestaurant(input.restaurant);

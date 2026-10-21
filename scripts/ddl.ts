@@ -1,4 +1,4 @@
-/** 資料表 DDL——同 src/db/schema.ts 對應，本地腳本共用 */
+/** 資料表 DDL——與 src/db/schema.ts 對應，本地腳本共用 */
 export const DDL = `
 CREATE TABLE IF NOT EXISTS restaurants (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -70,19 +70,19 @@ export const SEED: SeedRestaurant[] = [
       {
         visitedAt: "2026-09-12",
         overallRating: 5,
-        comment: "平靚正嘅代表，酥皮焗叉燒包一試難忘，下次要早啲嚟避開人潮。",
+        comment: "高性價比的代表，酥皮焗叉燒包一試難忘，下次要早點來避開人潮。",
         totalPrice: 180,
         wouldReturn: true,
         dishes: [
-          { name: "酥皮焗叉燒包", rating: 5, isRecommend: true, note: "必叫，兩個人一籠剛好" },
-          { name: "黃金流沙包", rating: 4, isRecommend: false, note: "趁熱食" },
+          { name: "酥皮焗叉燒包", rating: 5, isRecommend: true, note: "必點，兩個人一籠剛好" },
+          { name: "黃金流沙包", rating: 4, isRecommend: false, note: "趁熱吃" },
           { name: "香煎馬來糕", rating: 4, isRecommend: false },
         ],
       },
       {
         visitedAt: "2026-05-03",
         overallRating: 4,
-        comment: "今次排隊耐咗啲，水準依舊。",
+        comment: "這次排隊久了些，水準依舊。",
         totalPrice: 150,
         wouldReturn: true,
         dishes: [
@@ -102,13 +102,13 @@ export const SEED: SeedRestaurant[] = [
       {
         visitedAt: "2026-08-20",
         overallRating: 4,
-        comment: "湯底濃郁，但排隊半粒鐘有點誇張，唔係時時都想再排。",
+        comment: "湯底濃郁，但排隊半小時有點誇張，不會天天都想再排。",
         totalPrice: 145,
         wouldReturn: false,
         dishes: [
           { name: "天然豚骨拉麵", rating: 5, isRecommend: true, note: "辣度 1/2、麵硬、蔥多" },
           { name: "溏心蛋", rating: 4, isRecommend: false },
-          { name: "抹茶豆腐甜品", rating: 3, isRecommend: false, note: "普通，可以唔叫" },
+          { name: "抹茶豆腐甜品", rating: 3, isRecommend: false, note: "普通，可以不點" },
         ],
       },
     ],
@@ -123,11 +123,11 @@ export const SEED: SeedRestaurant[] = [
       {
         visitedAt: "2026-10-05",
         overallRating: 5,
-        comment: "雲吞皮薄餡靚，全蛋麵爽口，米芝蓮推介實至名歸。",
+        comment: "雲吞皮薄餡足，全蛋麵爽口，米其林推介實至名歸。",
         totalPrice: 68,
         wouldReturn: true,
         dishes: [
-          { name: "全蛋雲吞麵", rating: 5, isRecommend: true, note: "淨食雲吞都得" },
+          { name: "全蛋雲吞麵", rating: 5, isRecommend: true, note: "只吃雲吞也很值得" },
           { name: "薑蔥撈麵", rating: 4, isRecommend: false },
         ],
       },
@@ -143,7 +143,7 @@ export const SEED: SeedRestaurant[] = [
       {
         visitedAt: "2026-07-18",
         overallRating: 4,
-        comment: "菠蘿油夠脆，番茄通粉好喝，週末多人要等位。",
+        comment: "菠蘿油夠脆，番茄通粉很好喝，週末人多需要等位。",
         totalPrice: 55,
         wouldReturn: true,
         dishes: [

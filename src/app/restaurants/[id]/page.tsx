@@ -51,7 +51,7 @@ export default async function RestaurantPage({
               href={`/visits/new?restaurant=${restaurant.id}`}
               className="rounded-lg bg-amber-500 px-3 py-1.5 text-center text-sm font-medium text-white hover:bg-amber-600"
             >
-              ＋ 記返一次
+              ＋ 再記一筆
             </Link>
             <RestaurantEditForm restaurant={restaurant} />
             <DeleteRestaurantButton restaurantId={restaurant.id} />
@@ -109,7 +109,7 @@ export default async function RestaurantPage({
                     {d.name}
                   </span>
                   <span className="shrink-0 text-xs text-stone-500">
-                    食過 {d.times} 次
+                    吃過 {d.times} 次
                     {d.avgRating != null && ` · ★${d.avgRating}`}
                     {d.recommendCount > 0 && ` · 推介 ${d.recommendCount}`}
                   </span>
@@ -130,7 +130,7 @@ export default async function RestaurantPage({
         </h2>
         {visits.length === 0 ? (
           <p className="rounded-xl border border-dashed border-stone-300 bg-white px-4 py-8 text-center text-stone-500">
-            仲未去過？
+            還沒有去過？
           </p>
         ) : (
           <ul className="space-y-3">

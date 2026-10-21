@@ -33,7 +33,7 @@ export default function PlaceSearch({
           setOpen(true);
         }
       } catch {
-        // 搜尋服務唔通：保持無結果，用戶可以手動輸入
+        // 搜尋服務無法連通：保持無結果，用戶可以手動輸入
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -93,7 +93,7 @@ export default function PlaceSearch({
       )}
       {open && !loading && query.length >= 2 && results.length === 0 && (
         <div className="absolute z-10 mt-1 w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm text-stone-500 shadow-lg">
-          找不到相符地點，可以改用下面嘅「手動輸入」
+          找不到相符地點，可以改用下方的「手動輸入」
         </div>
       )}
     </div>

@@ -1,11 +1,11 @@
 /**
  * 本地開發資料庫伺服器（PGlite + Postgres wire protocol）
  *
- * 為咗令 Next.js 嘅多個 render worker 共享同一個資料庫實例，
- * 本地用官方 pglite-socket 起 wire-protocol server（好似真 Postgres 咁連），
- * app 經 DATABASE_URL=postgres://localhost:5433/postgres 連過去。
+ * 為了讓 Next.js 的多個 render worker 共享同一個資料庫實例，
+ * 本地使用官方 pglite-socket 啟動 wire-protocol server（如同連接真正的 Postgres），
+ * 與生產架構一致。
  *
- * 執行：npm run db:server（保持運行，另開 terminal 跑 npm run dev）
+ * 執行：npm run db:server（保持運行，另開 terminal 執行 npm run dev）
  */
 import { PGlite } from "@electric-sql/pglite";
 import { PGLiteSocketServer } from "@electric-sql/pglite-socket";
@@ -45,9 +45,9 @@ async function main() {
         }
       }
     }
-    console.log(`✓ 已灌入 ${SEED.length} 間餐廳示範資料`);
+    console.log(`✓ 已灌入 ${SEED.length} 家餐廳示範資料`);
   } else {
-    console.log(`✓ 資料庫已有 ${existing.rows[0]?.n} 間餐廳`);
+    console.log(`✓ 資料庫已有 ${existing.rows[0]?.n} 家餐廳`);
   }
 
   const server = new PGLiteSocketServer({
@@ -68,6 +68,6 @@ async function main() {
 }
 
 main().catch((e) => {
-  console.error("✗ db:server 启動失敗：", e);
+  console.error("✗ db:server 啟動失敗：", e);
   process.exit(1);
 });

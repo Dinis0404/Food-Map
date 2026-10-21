@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const restaurantInputSchema = z
   .object({
-    /** 已存在嘅餐廳 id（優先） */
+    /** 已存在的餐廳 id（優先） */
     id: z.string().uuid().optional(),
     name: z.string().trim().min(1, "餐廳名不可為空").max(200).optional(),
     address: z.string().trim().max(500).nullish(),
@@ -13,7 +13,7 @@ export const restaurantInputSchema = z
   })
   .refine(
     (r) => r.id || (r.name && r.lat !== undefined && r.lng !== undefined),
-    { message: "新餐廳需要名稱同座標" },
+    { message: "新餐廳需要名稱與座標" },
   );
 
 export const dishInputSchema = z.object({

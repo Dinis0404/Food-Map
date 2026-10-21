@@ -50,19 +50,19 @@ export default async function VisitDetailPage({
           <span>📅 {formatDate(visit.visitedAt)}</span>
           <StarDisplay value={visit.overallRating} />
           <span className={visit.wouldReturn ? "text-green-700" : "text-stone-400"}>
-            {visit.wouldReturn ? "👍 會再去" : "🤔 唔會再去"}
+            {visit.wouldReturn ? "👍 會再去" : "🤔 不會再去"}
           </span>
           {visit.totalPrice != null && (
-            <span>💰 埋單 {formatMoney(visit.totalPrice)}</span>
+            <span>💰 結帳 {formatMoney(visit.totalPrice)}</span>
           )}
         </div>
 
         <div className="mt-5">
           <h2 className="mb-2 text-sm font-semibold text-stone-700">
-            🍽️ 食咗乜（{visit.dishes.length} 道）
+            🍽️ 吃了什麼（{visit.dishes.length} 道）
           </h2>
           {visit.dishes.length === 0 ? (
-            <p className="text-sm text-stone-400">冇記錄菜式</p>
+            <p className="text-sm text-stone-400">沒有記錄菜式</p>
           ) : (
             <ul className="space-y-2">
               {visit.dishes.map((d) => (
@@ -95,7 +95,7 @@ export default async function VisitDetailPage({
               {visit.comment}
             </p>
           ) : (
-            <p className="text-sm text-stone-400">冇寫心得</p>
+            <p className="text-sm text-stone-400">沒有寫心得</p>
           )}
         </div>
       </article>

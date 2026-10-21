@@ -77,9 +77,9 @@ export default async function VisitsPage({
           有推介
         </label>
         <select name="sort" defaultValue={sortParam ?? "newest"} className={inputCls}>
-          <option value="newest">最新先</option>
-          <option value="oldest">最舊先</option>
-          <option value="rating">評分高先</option>
+          <option value="newest">由新到舊</option>
+          <option value="oldest">由舊到新</option>
+          <option value="rating">評分由高到低</option>
         </select>
         <button
           type="submit"
@@ -95,7 +95,7 @@ export default async function VisitsPage({
       {visits.length === 0 ? (
         <div className="rounded-xl border border-dashed border-stone-300 bg-white px-4 py-12 text-center text-stone-500">
           <div className="mb-2 text-3xl">🍃</div>
-          沒有符合嘅食記
+          沒有符合條件的食記
         </div>
       ) : (
         <ul className="space-y-3">

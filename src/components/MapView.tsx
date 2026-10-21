@@ -14,8 +14,8 @@ function Loading() {
 }
 
 /**
- * Leaflet 只可以喺瀏覽器跑，所以統一經呢個包裝以 ssr:false 動態載入，
- * 任何地方都唔好直接 import LeafletMap。
+ * Leaflet 只能在瀏覽器執行，統一透過此包裝以 ssr:false 動態載入；
+ * 其他地方請勿直接 import LeafletMap。
  */
 const LeafletMapView = dynamic(() => import("./LeafletMap"), {
   ssr: false,

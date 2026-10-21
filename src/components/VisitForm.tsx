@@ -54,7 +54,7 @@ function emptyRow(key: string): DishRowState {
   return { key, name: "", rating: null, isRecommend: false, note: "" };
 }
 
-/** 事件處理器入面先可以呼叫（含隨機成分，唔符合 render purity） */
+/** 只能在事件處理器中呼叫（含隨機成分，不符合 render purity） */
 function freshKey(): string {
   return `dish-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
@@ -146,25 +146,25 @@ export default function VisitForm({
     setError(null);
 
     if (!place || !place.name.trim()) {
-      setError("請先揀選或輸入餐廳");
+      setError("請先選擇或輸入餐廳");
       return;
     }
     if (!place.id && (place.lat == null || place.lng == null)) {
-      setError("請喺地圖上點擊一下，定位呢間餐廳");
+      setError("請在地圖上點擊一下，為這家餐廳定位");
       return;
     }
     if (overallRating < 1) {
-      setError("請俾呢一餐整體評分");
+      setError("請為這一餐評分");
       return;
     }
     const dishes = dishRows.filter((d) => d.name.trim());
     if (dishes.length === 0) {
-      setError("最少記低一道菜");
+      setError("至少記錄一道菜");
       return;
     }
     const price = totalPrice.trim() === "" ? null : Number(totalPrice);
     if (price != null && (!Number.isFinite(price) || price < 0)) {
-      setError("埋單金額格式唔啱");
+      setError("結帳金額格式不正確");
       return;
     }
 
@@ -225,7 +225,7 @@ export default function VisitForm({
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* 1. 餐廳 */}
       <section className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
-        <h2 className="mb-3 font-semibold">🍴 邊間餐廳？</h2>
+        <h2 className="mb-3 font-semibold">🍴 哪家餐廳？</h2>
 
         {place?.id ? (
           <div className="flex items-center justify-between gap-3 rounded-lg bg-amber-50 px-3 py-2.5">
@@ -287,7 +287,7 @@ export default function VisitForm({
                   </span>
                 ) : (
                   <span className="font-normal text-stone-500">
-                    喺下面地圖點擊一下
+                    在下方地圖點擊一下
                   </span>
                 )}
               </p>
@@ -310,7 +310,7 @@ export default function VisitForm({
             <PlaceSearch onPick={pickPlace} />
             <div className="flex items-center gap-3 text-xs text-stone-400">
               <span className="h-px flex-1 bg-stone-200" />
-              搵唔到？
+              找不到？
               <button
                 type="button"
                 onClick={() =>
@@ -328,7 +328,7 @@ export default function VisitForm({
 
       {/* 2. 日期 */}
       <section className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
-        <h2 className="mb-3 font-semibold">📅 幾時去？</h2>
+        <h2 className="mb-3 font-semibold">📅 什麼時候去？</h2>
         <input
           type="date"
           value={visitedAt}
@@ -341,7 +341,7 @@ export default function VisitForm({
       {/* 3. 菜式 */}
       <section className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="font-semibold">🍽️ 食咗乜？</h2>
+          <h2 className="font-semibold">🍽️ 吃了什麼？</h2>
           <button
             type="button"
             onClick={() => {
@@ -369,7 +369,7 @@ export default function VisitForm({
                 />
                 <button
                   type="button"
-                  title="推介呢道菜"
+                  title="推介這道菜"
                   onClick={() =>
                     updateDish(row.key, { isRecommend: !row.isRecommend })
                   }
@@ -383,7 +383,7 @@ export default function VisitForm({
                 </button>
                 <button
                   type="button"
-                  title="刪除呢道菜"
+                  title="刪除這道菜"
                   onClick={() =>
                     setDishRows((rows) => rows.filter((r) => r.key !== row.key))
                   }
@@ -414,7 +414,7 @@ export default function VisitForm({
                   value={row.note ?? ""}
                   onChange={(e) => updateDish(row.key, { note: e.target.value })}
                   className={`${inputCls} flex-1 min-w-40`}
-                  placeholder="備註（例如：要叫少甜）"
+                  placeholder="備註（例如：少甜）"
                 />
               </div>
             </div>
@@ -435,11 +435,11 @@ export default function VisitForm({
             onChange={(e) => setComment(e.target.value)}
             rows={3}
             className={inputCls}
-            placeholder="心得，例如：排咗半個鐘，但係值得；下次可以叫少飯…"
+            placeholder="心得，例如：排隊半小時，但很值得；下次可以少叫一點…"
           />
           <div className="flex flex-wrap items-center gap-4">
             <label className="flex items-center gap-2 text-sm">
-              <span className="text-stone-700">埋單（$）</span>
+              <span className="text-stone-700">結帳金額（$）</span>
               <input
                 type="number"
                 min="0"
@@ -475,7 +475,7 @@ export default function VisitForm({
           disabled={saving}
           className="flex-1 rounded-xl bg-amber-500 px-4 py-3 font-medium text-white shadow-sm transition-colors hover:bg-amber-600 disabled:opacity-60"
         >
-          {saving ? "儲存中…" : mode === "create" ? "記低呢一餐 🍜" : "更新食記"}
+          {saving ? "儲存中…" : mode === "create" ? "記下這一餐 🍜" : "更新食記"}
         </button>
         <button
           type="button"

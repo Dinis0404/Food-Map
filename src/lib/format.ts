@@ -18,7 +18,7 @@ export function formatMoney(n: number): string {
   return `$${n % 1 === 0 ? n.toFixed(0) : n.toFixed(2)}`;
 }
 
-/** 本地時區嘅今日，格式 YYYY-MM-DD */
+/** 本地時區的今日，格式 YYYY-MM-DD */
 export function todayLocalISO(): string {
   const d = new Date();
   return new Date(d.getTime() - d.getTimezoneOffset() * 60000)

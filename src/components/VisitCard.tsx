@@ -26,7 +26,7 @@ export default function VisitCard({
             <span>📅 {formatDate(visit.visitedAt)}</span>
             <StarDisplay value={visit.overallRating} size="text-sm" />
             <span className={visit.wouldReturn ? "text-green-700" : "text-stone-400"}>
-              {visit.wouldReturn ? "👍 會再去" : "🤔 唔會再去"}
+              {visit.wouldReturn ? "👍 會再去" : "🤔 不會再去"}
             </span>
             {visit.totalPrice != null && (
               <span>💰 {formatMoney(visit.totalPrice)}</span>
